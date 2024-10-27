@@ -12,6 +12,8 @@ public class Commons {
     public static final String ERROR_STUDENT_BOTH_NULL = "Error! Both parameters passed are null!";
     public static final String DELETE_STUDENT_SUCCESS = "Student %s successfully deleted";
     public static final String LIST_STUDENT_SUCCESS = "Here are your students:";
+    public static final String ERROR_NO_STUDENTS = "Your class currently has no students! " +
+            "Please consider adding some!";
 
     //@@author yeekian
     //Grade

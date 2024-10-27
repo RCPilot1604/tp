@@ -3,6 +3,7 @@ package tutorlink.command;
 import java.util.HashMap;
 
 import tutorlink.appstate.AppState;
+import tutorlink.commons.Commons;
 import tutorlink.result.CommandResult;
 
 public class ListStudentCommand extends Command {
@@ -12,7 +13,10 @@ public class ListStudentCommand extends Command {
 
     @Override
     public CommandResult execute(AppState appState, HashMap<String, String> hashMap) {
-        return new CommandResult(appState.students.toString());
+        if (appState.students.size() < 1) {
+            return new CommandResult(Commons.ERROR_NO_STUDENTS);
+        }
+        return new CommandResult(Commons.LIST_STUDENT_SUCCESS + "\n" + appState.students.toString());
     }
 
     @Override
