@@ -8,8 +8,8 @@
 actor user
 
 participant ":TutorLink" as TL LOGIC_COLOR_5
-participant ":Logic" as L LOGIC_COLOR_7
 participant ":Ui" as UI LOGIC_COLOR_6
+participant ":Logic" as L LOGIC_COLOR_7
 participant ":AppState" as A LOGIC_COLOR_3
 participant ":Storage" as S LOGIC_COLOR_4
 
@@ -18,22 +18,26 @@ user -> TL: start
 activate TL
 create UI
 TL -> UI
-create L
-TL -> L
+activate UI
 create A
-TL -> A
+UI -> A : new AppState
+activate A
+UI <-- A : appState
+deactivate A
+create L
+UI -> L : new Logic
+activate L
+UI <-- L : logic
+deactivate L
+deactivate UI
+create L
 create S
 TL -> S
 user -> TL:"delete_student i/A1234567X"
-TL -> UI: getUserInput()
+TL -> UI: runApp()
 activate UI
-TL <-- UI: String
-TL -> L : getCommand(line)
+UI -> L : execute(line)
 activate L
-TL <-- L: Command
-TL -> L : getArguments
-TL <-- L : HashMap<String,String>
-TL -> L : execute()
 L -> A : deleteStudentByMatricNumber("A1234567X")
 activate A
 A -> S : saveStudentFile(students)
@@ -47,10 +51,12 @@ deactivate S
 
 L <-- A
 deactivate A
-TL <-- L : CommandResult
+UI <-- L : CommandResult
 deactivate L
-TL -> UI : displayResult
-TL <-- UI
+UI -> UI : displayResult
+activate UI
+UI --> UI
 deactivate UI
+TL <-- UI
 user <-- TL
 @enduml
