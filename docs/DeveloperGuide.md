@@ -34,33 +34,48 @@ The sequence diagram below depicts a typical user interaction with <code>TutorLi
 
 
 
-### AppState 
-//Content goes here
-
-### Attendance 
-//Content goes here
-
-### Command 
-//Content goes here
-
-### Component
-//Content goes here
-
-### Exceptions
-//Content goes here
-
-### Grade
-//Content goes here
-
-### Result
-//Content goes here
-
-### Student
+### TutorLink
 //Content goes here
 
 ### Ui
 //Content goes here
-//contains Ui and Parser classes
+
+### Logic
+The <code>Logic</code> component handles the interpretation of user input from <code>UI</code>. 
+
+![Logic_Class_Diagram.png](images%2FLogic_Class_Diagram.png)
+
+The <code>Logic</code> package consists of <code>LogicManager</code>, <code>Parser</code>, <code>Logic</code>, 
+<code>Command</code> and <code>CommandResult</code> classes.
+
+* <code>LogicManager</code>: Serves as the overall coordinator of the logic component; sequentially calls the methods of 
+the other classes in the <code>Logic</code> component. 
+* <code>Command</code>: Abstract class that serves as a blueprint for <code>XYZCommand</code>
+* <code>XYZCommand</code>: Represents the specific implementation of the particular operation to be carried out by overriding <code>execute()</code>. 
+* <code>CommandResult</code>: Represents the result of <code>XYZCommand</code> which is returned to Ui
+
+<code>Logic</code> component is referenced and called by <code>Ui</code> component. Subsequently, the result of the operation in <code>Logic</code>
+is returned to the <code>Ui</code> caller. A typical command execution can be represented by the following Sequence Diagram: 
+
+![Logic_Sequence_Delete_Student.png](images/Logic_Sequence_Delete_Student.png)
+
+1. Whenever the Ui receives a command from the user (over CLI), it calls the <code>execute(String)</code> method
+of <code>LogicManager</code>, passing the user-inputted string as a parameter.
+2. <code>LogicManager</code> then calls <code>getCommand(String)</code> of <code>Parser</code> class which in turn instantiates and returns 
+a <code>XYZCommand</code> (in this case, <code>DeleteStudentCommand</code>) to the <code>LogicManager</code>. 
+3. <code>LogicManager</code> then calls the <code>getArgumentPrefixes()</code> method of <code>DeleteStudentCommand</code>
+which returns a String[] containing all command argument prefixes (for example in the command <code>"delete_student i/A1234567X"</code>, the sole argument prefix is <code>i/</code>).
+4. <code>LogicManager</code> then calls the <code>getArgument</code> method of <code>Parser</code> which takes the aforementioned <code>String[]</code>
+and returns a hashmap containing the prefix-value pairs. 
+5. <code>LogicManager</code> then calls <code>execute(...)</code> of <code>DeleteStudentCommand</code> which does the following:
+    1. Calls the corresponding method of <code>Model</code> to perform the required command (in this case, calling <code>deleteStudent()</code>)
+   2. Instantiates a <code>CommandResult</code> object and returns it as the result.
+6. Finally, <code>LogicManager</code> returns the <code>CommandResult</code> object back to the caller, <code>Ui</code>
+### AppState
+//Content goes here
+
+### Storage
+//Content goes here
 
 ## Product Scope
 
