@@ -1,0 +1,61 @@
+@startuml
+<style>
+    participant {
+        FontColor White
+    }
+</style>
+!include Style.puml
+
+box Ui BOX_COLOR_6
+participant ":Ui" as UI LOGIC_COLOR_6
+end box
+
+box Logic BOX_COLOR_5
+participant ":LogicManager" as LM LOGIC_COLOR_5
+participant ":Parser" as P LOGIC_COLOR_5
+participant ":DeleteStudentCommand" as C LOGIC_COLOR_5
+participant "res:CommandResult" as R LOGIC_COLOR_5
+end box
+box Model BOX_COLOR_4
+participant ":Model" as M LOGIC_COLOR_4
+end box
+UI -> LM : execute(appState, "delete_student ...")
+activate LM
+LM -> P : getCommand("delete_student ...")
+activate P
+create C
+P -> C : new DeleteStudentCommand()
+activate C
+P <-- C : DeleteStudentCommand
+deactivate C
+LM <-- P : DeleteStudentCommand
+deactivate P
+LM -> C : getArgumentPrefixes()
+activate C
+LM <-- C : String[]
+deactivate C
+LM -> P : getArguments(String[], "delete_student ...")
+activate P
+LM <-- P : HashMap<String,String>
+deactivate P
+
+LM -> C : execute(appState, HashMap<String,String>)
+activate C
+C -> M : deleteStudent(...)
+activate M
+C <-- M
+deactivate M
+create R
+C -> R : new CommandResult()
+activate R
+C <-- R : CommandResult
+deactivate R
+
+LM <-- C : CommandResult
+deactivate C
+UI <-- LM : CommandResult
+deactivate LM
+
+
+
+@enduml

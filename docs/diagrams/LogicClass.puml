@@ -1,0 +1,38 @@
+@startuml Logic Diagram
+!include Style.puml
+skinparam rectangle {
+    BackgroundColor White
+    BorderColor White
+}
+
+package Model {
+    rectangle " " as HiddenModel {
+
+     }
+}
+package UI {
+    rectangle " " as HiddenModel {
+
+     }
+}
+
+package Logic {
+
+Class LogicManager
+Class "{abstract}\nCommand" as Command
+Class XYZCommand
+Class CommandResult
+Class Parser
+
+XYZCommand -left-|> Command
+XYZCommand ..> CommandResult:<<create>>
+LogicManager -up-> "1" Parser
+LogicManager -left-> "1" XYZCommand
+Parser ..> XYZCommand:<<create>>
+LogicManager -->"1" CommandResult
+UI -up-> "1"LogicManager
+Model .right.> LogicManager
+CommandResult .right.> UI
+note bottom of XYZCommand: XYZCommand = AddStudentCommand, \nFindStudentCommand, \nAddComponentCommand, etc
+}
+@enduml
