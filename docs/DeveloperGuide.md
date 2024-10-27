@@ -13,10 +13,10 @@ The high-level design of TutorLink is as depicted in the following **Architectur
 
 **Main Components of the Architecture**
 
-<code>TutorLink</code>: Main class that serves as the main entry point of the application.
+<code>TutorLink</code>: Main class that serves as the main entry point of the application and
+the overall coordination of interactions between the various classes.
 
-- At app launch, TutorLink initializes components (<code>Parser</code>, <code>Ui</code>, <code>Storage</code>, <code>
-  AppState</code>).
+- At app launch, TutorLink initializes the required packages (Ui, Logic, AppState, Storage)
 - On app shutdown, it shuts down the components and invokes cleanup methods.
 
 The key classes providing functionality to TutorLink are:
@@ -24,14 +24,15 @@ The key classes providing functionality to TutorLink are:
 1. <code>AppState</code>: Stores global variables/resources required by TutorLink at run time.
 2. <code>Ui</code>: Collects data (via Strings sent via CLI) from the user and relays information to the user (via
    printing back to the CLI).
-3. <code>Parser</code>: Interprets the raw data from the user; applies data validation and handles necessary exceptions.
+3. <code>Logic</code>: Interprets the raw data from the user, applies data validation, generates and executes 
+required opreations, and handles necessary exceptions.
 4. <code>Storage</code>: Serves as long-term storage of data to be retained even after TutorLink is shut down.
-
-<code>CommandResult</code> represents the result of user input.
 
 #### Typical Architecture-Level Interaction
 
 The sequence diagram below depicts a typical user interaction with <code>TutorLink</code>:
+
+
 
 ### AppState 
 //Content goes here
