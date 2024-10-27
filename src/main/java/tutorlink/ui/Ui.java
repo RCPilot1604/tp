@@ -1,6 +1,6 @@
 package tutorlink.ui;
 
-import tutorlink.logic.Logic;
+import tutorlink.logic.LogicManager;
 import tutorlink.model.AppState;
 import tutorlink.model.exceptions.TutorLinkException;
 import tutorlink.logic.result.CommandResult;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Ui {
     private Scanner in = new Scanner(System.in);
     private AppState appState;
-    private Logic logic;
+    private LogicManager logicManager;
     private final String logo = "___________      __               .____    .__        __\n"
             + "\\__    ___/_ ___/  |_  ___________|    |   |__| ____ |  | __\n"
             + "  |    | |  |  \\   __\\/  _ \\_  __ \\    |   |  |/    \\|  |/ /\n"
@@ -24,14 +24,14 @@ public class Ui {
 
     public Ui() {
         appState = new AppState();
-        logic = new Logic();
+        logicManager = new LogicManager();
     }
 
     public void runApp() {
         //@@author ThienDuc
         try {
             String line = getUserInput();
-            CommandResult result = logic.execute(appState, line);
+            CommandResult result = logicManager.execute(appState, line);
             displayResult(result);
         } catch (TutorLinkException e) {
             displayException(e);
