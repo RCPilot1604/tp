@@ -1,14 +1,7 @@
 package tutorlink;
 
-import tutorlink.model.AppState;
-import tutorlink.logic.command.Command;
-import tutorlink.model.exceptions.TutorLinkException;
-import tutorlink.logic.result.CommandResult;
 import tutorlink.ui.Ui;
-import tutorlink.logic.parser.Parser;
-
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
