@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner in = new Scanner(System.in);
-    private AppState appState = new AppState();
+    private AppState appState;
+    private Logic logic;
     private final String logo = "___________      __               .____    .__        __\n"
             + "\\__    ___/_ ___/  |_  ___________|    |   |__| ____ |  | __\n"
             + "  |    | |  |  \\   __\\/  _ \\_  __ \\    |   |  |/    \\|  |/ /\n"
@@ -22,13 +23,15 @@ public class Ui {
             "-------------------------------------------------------------";
 
     public Ui() {
+        appState = new AppState();
+        logic = new Logic();
     }
 
     public void runApp() {
         //@@author ThienDuc
         try {
             String line = getUserInput();
-            CommandResult result = Logic.getInstance().execute(appState, line);
+            CommandResult result = logic.execute(appState, line);
             displayResult(result);
         } catch (TutorLinkException e) {
             displayException(e);

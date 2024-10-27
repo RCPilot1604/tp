@@ -8,17 +8,6 @@ import tutorlink.model.AppState;
 
 public class Logic {
     private static final Parser parser = new Parser();
-    private static Logic singleton = null;
-    private Logic() {
-
-    }
-
-    public static Logic getInstance() {
-        if(singleton == null) {
-            singleton = new Logic();
-        }
-        return singleton;
-    }
 
     public CommandResult execute(AppState appState, String line) {
         //@@author yeekian
