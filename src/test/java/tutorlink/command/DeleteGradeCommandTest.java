@@ -2,11 +2,15 @@
 package tutorlink.command;
 
 import org.junit.jupiter.api.Test;
-import tutorlink.appstate.AppState;
-import tutorlink.component.Exam;
-import tutorlink.lists.GradeList;
-import tutorlink.parser.Parser;
-import tutorlink.result.CommandResult;
+import tutorlink.logic.command.AddGradeCommand;
+import tutorlink.logic.command.AddStudentCommand;
+import tutorlink.logic.command.Command;
+import tutorlink.logic.command.DeleteGradeCommand;
+import tutorlink.model.AppState;
+import tutorlink.model.component.Exam;
+import tutorlink.model.lists.GradeList;
+import tutorlink.logic.parser.Parser;
+import tutorlink.logic.result.CommandResult;
 
 import java.util.HashMap;
 

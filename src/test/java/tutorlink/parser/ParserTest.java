@@ -2,16 +2,17 @@
 package tutorlink.parser;
 
 import org.junit.jupiter.api.Test;
-import tutorlink.command.AddStudentCommand;
-import tutorlink.command.Command;
-import tutorlink.command.DeleteStudentCommand;
-import tutorlink.command.ExitCommand;
-import tutorlink.command.FindStudentCommand;
-import tutorlink.command.InvalidCommand;
-import tutorlink.command.ListStudentCommand;
+import tutorlink.logic.command.AddStudentCommand;
+import tutorlink.logic.command.Command;
+import tutorlink.logic.command.DeleteStudentCommand;
+import tutorlink.logic.command.ExitCommand;
+import tutorlink.logic.command.FindStudentCommand;
+import tutorlink.logic.command.InvalidCommand;
+import tutorlink.logic.command.ListStudentCommand;
 
 
 import java.util.HashMap;
+import tutorlink.logic.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

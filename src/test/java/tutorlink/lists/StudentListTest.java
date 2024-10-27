@@ -3,9 +3,10 @@ package tutorlink.lists;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tutorlink.exceptions.DuplicateMatricNumberException;
-import tutorlink.exceptions.StudentNotFoundException;
-import tutorlink.student.Student;
+import tutorlink.model.exceptions.DuplicateMatricNumberException;
+import tutorlink.model.exceptions.StudentNotFoundException;
+import tutorlink.model.lists.StudentList;
+import tutorlink.model.student.Student;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

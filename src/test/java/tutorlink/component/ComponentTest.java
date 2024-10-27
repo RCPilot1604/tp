@@ -2,6 +2,10 @@ package tutorlink.component;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import tutorlink.model.component.Assignment;
+import tutorlink.model.component.ClassParticipation;
+import tutorlink.model.component.Component;
+import tutorlink.model.component.Exam;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

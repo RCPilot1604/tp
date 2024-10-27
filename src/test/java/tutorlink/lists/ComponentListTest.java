@@ -3,11 +3,12 @@ package tutorlink.lists;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import tutorlink.component.Assignment;
-import tutorlink.component.Component;
-import tutorlink.component.Exam;
-import tutorlink.exceptions.ComponentNotFoundException;
-import tutorlink.exceptions.DuplicateComponentException;
+import tutorlink.model.component.Assignment;
+import tutorlink.model.component.Component;
+import tutorlink.model.component.Exam;
+import tutorlink.model.exceptions.ComponentNotFoundException;
+import tutorlink.model.exceptions.DuplicateComponentException;
+import tutorlink.model.lists.ComponentList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

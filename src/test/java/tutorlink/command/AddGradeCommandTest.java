@@ -2,19 +2,22 @@
 package tutorlink.command;
 
 import org.junit.jupiter.api.Test;
-import tutorlink.appstate.AppState;
-import tutorlink.commons.Commons;
-import tutorlink.component.Assignment;
-import tutorlink.component.ClassParticipation;
-import tutorlink.component.Exam;
-import tutorlink.exceptions.ComponentNotFoundException;
-import tutorlink.exceptions.DuplicateGradeException;
-import tutorlink.exceptions.IllegalValueException;
-import tutorlink.exceptions.StudentNotFoundException;
-import tutorlink.grade.Grade;
-import tutorlink.lists.GradeList;
-import tutorlink.parser.Parser;
-import tutorlink.result.CommandResult;
+import tutorlink.logic.command.AddGradeCommand;
+import tutorlink.logic.command.AddStudentCommand;
+import tutorlink.logic.command.Command;
+import tutorlink.model.AppState;
+import tutorlink.model.Commons;
+import tutorlink.model.component.Assignment;
+import tutorlink.model.component.ClassParticipation;
+import tutorlink.model.component.Exam;
+import tutorlink.model.exceptions.ComponentNotFoundException;
+import tutorlink.model.exceptions.DuplicateGradeException;
+import tutorlink.model.exceptions.IllegalValueException;
+import tutorlink.model.exceptions.StudentNotFoundException;
+import tutorlink.model.grade.Grade;
+import tutorlink.model.lists.GradeList;
+import tutorlink.logic.parser.Parser;
+import tutorlink.logic.result.CommandResult;
 
 
 import java.util.HashMap;

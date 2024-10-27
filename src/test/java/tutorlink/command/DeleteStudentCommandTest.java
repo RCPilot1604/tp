@@ -3,15 +3,17 @@ package tutorlink.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tutorlink.appstate.AppState;
-import tutorlink.commons.Commons;
-import tutorlink.component.Assignment;
-import tutorlink.exceptions.IllegalValueException;
-import tutorlink.exceptions.StudentNotFoundException;
-import tutorlink.grade.Grade;
-import tutorlink.result.CommandResult;
+import tutorlink.logic.command.AddStudentCommand;
+import tutorlink.logic.command.DeleteStudentCommand;
+import tutorlink.model.AppState;
+import tutorlink.model.Commons;
+import tutorlink.model.component.Assignment;
+import tutorlink.model.exceptions.IllegalValueException;
+import tutorlink.model.exceptions.StudentNotFoundException;
+import tutorlink.model.grade.Grade;
+import tutorlink.logic.result.CommandResult;
 import java.util.HashMap;
-import tutorlink.student.Student;
+import tutorlink.model.student.Student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
