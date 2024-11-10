@@ -56,13 +56,6 @@ public class StudentList {
         return studentArrayList;
     }
 
-    @Override
-    public String toString() {
-        return IntStream.range(0, studentArrayList.size())
-                .mapToObj(i -> ("\t" + (i + 1)) + ": " + studentArrayList.get(i)) // 1-based index
-                .collect(Collectors.joining(TO_STRING_DELIMITER));
-    }
-
     public StudentList findStudentByMatricNumber(String matricNumber) throws TutorLinkException {
         StudentList filteredList = new StudentList();
         filteredList.studentArrayList = studentArrayList

@@ -74,6 +74,7 @@ class GradeListTest {
         GradeList result = gradeList.findGrade("A1234567B", "Homework");
         assertEquals(1, result.toString().split("\n").length);
         String stringResult = result.toString();
+        System.out.println(stringResult);
         assertTrue(stringResult.contains("John Doe"));
     }
 

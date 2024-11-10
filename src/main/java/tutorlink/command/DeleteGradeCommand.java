@@ -8,6 +8,7 @@ import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
 import tutorlink.exceptions.DuplicateMatricNumberException;
 import tutorlink.exceptions.IllegalValueException;
+import tutorlink.exceptions.IncompleteGradesException;
 import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.lists.StudentList;
@@ -49,8 +50,13 @@ public class DeleteGradeCommand extends Command {
 
         // Update student GPA
         Student student = filteredList.getStudentArrayList().get(0);
-        double newGPA = appState.grades.calculateStudentPercentageScore(matricNumber, appState.components);
-        student.setPercentageScore(newGPA);
+        try {
+            double percentageScore = appState.grades.calculateStudentPercentageScore(matricNumber,
+                    appState.components);
+            student.setPercentageScore(percentageScore);
+        } catch (IncompleteGradesException e) {
+            
+        }
 
         return new CommandResult(String.format(Commons.DELETE_GRADE_SUCCESS, componentDescription, matricNumber));
     }

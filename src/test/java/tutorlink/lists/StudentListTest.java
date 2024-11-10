@@ -81,14 +81,5 @@ class StudentListTest {
     void find_name_notFound() {
         assertThrows(StudentNotFoundException.class, () -> studentList.findStudentByName("Nonexistent Name"));
     }
-
-    @Test
-    void testToString() throws DuplicateMatricNumberException {
-        studentList.addStudent("A1234567B", "John Doe");
-        studentList.addStudent("A7654321B", "Jane Smith");
-        String expectedString = "\t1: John Doe (matric no: A1234567B, percentage score: 0.00)"
-                + "\n\t2: Jane Smith (matric no: A7654321B, percentage score: 0.00)";
-        assertEquals(expectedString, studentList.toString());
-    }
 }
 //@@author

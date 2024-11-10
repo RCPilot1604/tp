@@ -26,8 +26,8 @@ public class StudentTest {
 
     @Test
     void testToString() {
-        assertEquals("John Doe (matric no: A1234567B, percentage score: 0.00)", student1.toString());
-        assertEquals("Jane Smith (matric no: A7654321B, percentage score: 0.00)", student2.toString());
+        assertEquals("John Doe (matric no: A1234567B)", student1.toString());
+        assertEquals("Jane Smith (matric no: A7654321B)", student2.toString());
     }
 
     @Test

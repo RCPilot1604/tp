@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
+import tutorlink.exceptions.IncompleteGradesException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.grade.Grade;
 
@@ -18,7 +19,8 @@ public class GradeList {
             "Error! Grade for component %s for student %s already exists in the list!";
     private static final String ERROR_NO_GRADE_FOUND =
             "Error! Grade for component %s for student %s does not exist in the list!";
-
+    private static final String ERROR_PERCENTAGE_SCORE_NO_GRADES = "No Grades";
+    private static final String ERROR_PERCENTAGE_SCORE_IP = "IP";
 
     private ArrayList<Grade> gradeArrayList;
 
@@ -30,7 +32,6 @@ public class GradeList {
         this.gradeArrayList = gradeArrayList;
     }
 
-    //@@author RCPilot1604
     public void deleteGrade(String matricNumber, String componentDescription) throws GradeNotFoundException {
         matricNumber = matricNumber.toUpperCase();
         for (Grade grade : gradeArrayList) {
@@ -104,19 +105,18 @@ public class GradeList {
                 .collect(Collectors.toCollection(ArrayList::new));
 
         if (studentGrades.isEmpty()) {
-            return 0;
+            throw new IncompleteGradesException(ERROR_PERCENTAGE_SCORE_NO_GRADES);
         }
 
-        double totalWeighting = componentList
-                .getComponentArrayList()
+        //Compute the total weight of all grades tagged to this student
+        double totalWeighting = studentGrades
                 .stream()
-                .mapToDouble(c -> c.getWeight())
+                .mapToInt(c -> c.getComponent().getWeight())
                 .sum();
 
-        if(totalWeighting == 0) {
-            return 0;
+        if(totalWeighting < componentList.getTotalWeighting()) {
+            throw new IncompleteGradesException(ERROR_PERCENTAGE_SCORE_IP);
         }
-
         return studentGrades
                 .stream()
                 .mapToDouble(grade ->

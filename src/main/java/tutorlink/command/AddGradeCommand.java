@@ -1,5 +1,6 @@
 package tutorlink.command;
 
+import java.util.logging.Logger;
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
 import tutorlink.component.Component;
@@ -7,6 +8,7 @@ import tutorlink.exceptions.ComponentNotFoundException;
 import tutorlink.exceptions.DuplicateComponentException;
 import tutorlink.exceptions.DuplicateMatricNumberException;
 import tutorlink.exceptions.IllegalValueException;
+import tutorlink.exceptions.IncompleteGradesException;
 import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.grade.Grade;
@@ -25,6 +27,7 @@ public class AddGradeCommand extends Command {
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/", "s/"};
     public static final String COMMAND_WORD = "add_grade";
     private static final String ERROR_DUPLICATE_GRADE_ON_ADD = "Error! Grade (%s, %s) already exists in the list!";
+    private static final Logger logger = Logger.getLogger(DeleteComponentCommand.class.getName());
 
     @Override
     public CommandResult execute(AppState appstate, HashMap<String, String> hashmap) throws TutorLinkException {
@@ -58,12 +61,16 @@ public class AddGradeCommand extends Command {
 
             appstate.grades.addGrade(grade);
 
-            double newPercentageScore = appstate.grades.calculateStudentPercentageScore(
-                    student.getMatricNumber(),
-                    appstate.components
-            );
-
-            student.setPercentageScore(newPercentageScore);
+            //modify the percentage score of the student to whom this grade object is tagged to
+            try {
+                double newPercentageScore = appstate.grades.calculateStudentPercentageScore(
+                        student.getMatricNumber(),
+                        appstate.components
+                );
+                student.setPercentageScore(newPercentageScore);
+            } catch (IncompleteGradesException e) {
+                logger.info(e.getMessage());
+            }
 
         } catch (NumberFormatException e) {
             throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);

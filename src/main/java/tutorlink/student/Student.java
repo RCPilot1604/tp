@@ -33,10 +33,19 @@ public class Student {
         this.percentageScore = percentageScore;
     }
 
+    /**
+     * Returns a string representation of the object, including the name and matriculation number.
+     *
+     * This method overrides the default {@code toString} method to provide a custom string format
+     * that combines the object's name and matriculation number in the format:
+     * {@code "name (matric no: matricNumber)"}.
+     *
+     * Note: We need to keep this for GradeList.toString()
+     * @return a string representing the object in the format "name (matric no: matricNumber)"
+     */
     @Override
     public String toString() {
-        return this.name + " (matric no: " + this.matricNumber + ", percentage score: " +
-                String.format("%.2f", this.percentageScore) + ")";
+        return this.name + " (matric no: " + this.matricNumber + ")";
     }
 
     @Override

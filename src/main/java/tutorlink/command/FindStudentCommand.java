@@ -2,17 +2,34 @@ package tutorlink.command;
 
 import java.util.HashMap;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import tutorlink.commons.Commons;
 import tutorlink.exceptions.IllegalValueException;
+import tutorlink.exceptions.IncompleteGradesException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.lists.StudentList;
 import tutorlink.result.CommandResult;
 import tutorlink.appstate.AppState;
+import tutorlink.student.Student;
 
 public class FindStudentCommand extends Command {
-
+    private static final String TO_STRING_DELIMITER = "\n";
     public static final String[] ARGUMENT_PREFIXES = {"i/", "n/"};
     public static final String COMMAND_WORD = "find_student";
+
+    private String printStudent(Student student, AppState appState) {
+        try {
+            double percentageScore = appState.grades.calculateStudentPercentageScore(student.getMatricNumber(),
+                    appState.components);
+            return student.getName() + " (matric no: " + student.getMatricNumber() + ", percentage score: " +
+                    String.format("%.2f", percentageScore) + ")";
+        } catch (IncompleteGradesException e) {
+            return student.getName() + " (matric no: " + student.getMatricNumber() + ", percentage score: " +
+                    String.format("%s", e.getMessage()) + ")";
+        }
+
+    }
 
     @Override
     public CommandResult execute(AppState appstate, HashMap<String, String> hashmap) throws TutorLinkException {
@@ -28,7 +45,11 @@ public class FindStudentCommand extends Command {
         } else {
             students = appstate.students.findStudentByName(name);
         }
-        return new CommandResult(students.toString());
+        String result = IntStream.range(0, students.getStudentArrayList().size())
+                .mapToObj(i -> ("\t" + (i + 1)) + ": " +
+                        printStudent(students.getStudentArrayList().get(i), appstate)) // 1-based index
+                .collect(Collectors.joining(TO_STRING_DELIMITER));
+        return new CommandResult(result);
     }
 
     @Override
