@@ -13,6 +13,7 @@ import tutorlink.command.ListGradeCommand;
 import tutorlink.command.ListStudentCommand;
 import tutorlink.command.AddGradeCommand;
 import tutorlink.command.AddComponentCommand;
+import tutorlink.command.UpdateComponentCommand;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -62,6 +63,9 @@ public class Parser {
 
         case ListGradeCommand.COMMAND_WORD:
             return new ListGradeCommand();
+
+        case UpdateComponentCommand.COMMAND_WORD:
+            return new UpdateComponentCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(); // Lists all students

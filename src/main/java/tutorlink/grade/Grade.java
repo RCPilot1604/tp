@@ -23,6 +23,9 @@ public class Grade {
     }
 
     public double getScore() {
+        if(component!= null && component.getMaxScore() < score){
+            score = component.getMaxScore();
+        }
         return score;
     }
 
