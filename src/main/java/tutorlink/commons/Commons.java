@@ -27,6 +27,7 @@ public class Commons {
 
     //@@author TrungBui32
     //Component
+    public static final int MAX_WEIGHT = 100;
     public static final String ADD_COMPONENT_SUCCESS =
             "Component %s of weight %s%%, with max score %s added successfully!";
     public static final String DELETE_COMPONENT_SUCCESS = "Component %s successfully deleted";

@@ -33,40 +33,41 @@ public class DeleteComponentCommandTest {
     void deleteComponent_success() {
         arguments = new HashMap<>();
         arguments.put("c/", "finals");
+        int initialWeighting = appState.components.getTotalWeighting();
         result = command.execute(appState, arguments);
         assertNotNull(result);
         assertEquals(appState.components.size(), 2);
-        try {
-            appState.components.findComponent("finals");
-        } catch (ComponentNotFoundException e) {
-            assertEquals(e.getMessage(), "Error! Component finals does not exist in the list!");
-        } catch (Exception e) {
-            fail("Expected: ComponentNotFoundException, actual: " + e.getMessage());
-        }
+        assertEquals(appState.components.getTotalWeighting(), initialWeighting - 40);
     }
 
     @Test
     void deleteComponent_notFound_fail() {
         arguments = new HashMap<>();
         arguments.put("c/", "midterms");
+        int initialWeighting = appState.components.getTotalWeighting();
         try {
             command.execute(appState, arguments);
         } catch (ComponentNotFoundException e) {
             assertEquals(e.getMessage(), "Error! Component midterms does not exist in the list!");
         } catch (Exception e) {
             fail("Expected: ComponentNotFoundException, actual: " + e.getMessage());
+        } finally {
+            assertEquals(appState.components.getTotalWeighting(), initialWeighting);
         }
     }
 
     @Test
     void deleteComponent_emptyParam_fail() {
         arguments = new HashMap<>();
+        int initialWeighting = appState.components.getTotalWeighting();
         try {
             command.execute(appState, arguments);
         } catch (IllegalValueException e) {
             assertEquals(e.getMessage(), Commons.ERROR_NULL);
         } catch (Exception e) {
             fail("Expected: ComponentNotFoundException, actual: " + e.getMessage());
+        } finally {
+            assertEquals(appState.components.getTotalWeighting(), initialWeighting);
         }
     }
 

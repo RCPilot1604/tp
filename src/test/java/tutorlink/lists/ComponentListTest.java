@@ -71,7 +71,7 @@ class ComponentListTest {
     }
 
     @Test
-    void toString_test() {
+    void componentList_toString_success() {
         componentList.addComponent(comp1);
         componentList.addComponent(comp3);
         String expectedResult = "\t1: Homework 1 (maxScore: 30.0, weight: 10%)\n" +
