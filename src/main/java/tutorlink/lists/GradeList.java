@@ -109,11 +109,10 @@ public class GradeList {
         }
 
         //Compute the total weight of all grades tagged to this student
-        double totalWeighting = studentGrades
+        int totalWeighting = studentGrades
                 .stream()
                 .mapToInt(c -> c.getComponent().getWeight())
                 .sum();
-
         if(totalWeighting < componentList.getTotalWeighting()) {
             throw new IncompleteGradesException(ERROR_PERCENTAGE_SCORE_IP);
         }
