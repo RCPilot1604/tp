@@ -14,9 +14,11 @@ import tutorlink.appstate.AppState;
 import tutorlink.student.Student;
 
 public class FindStudentCommand extends Command {
-    private static final String TO_STRING_DELIMITER = "\n";
-    public static final String[] ARGUMENT_PREFIXES = {"i/", "n/"};
+
     public static final String COMMAND_WORD = "find_student";
+    public static final String[] ARGUMENT_PREFIXES = {"i/", "n/"};
+
+    private static final String TO_STRING_DELIMITER = "\n";
 
     private String printStudent(Student student, AppState appState) {
         try {

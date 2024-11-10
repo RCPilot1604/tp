@@ -1,6 +1,7 @@
 package tutorlink.command;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +22,8 @@ public class DeleteGradeCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/"};
     public static final String COMMAND_WORD = "delete_grade";
+    private static final Logger logger = Logger.getLogger(DeleteComponentCommand.class.getName());
+
     @Override
     public CommandResult execute(AppState appState, HashMap<String, String> hashmap) throws TutorLinkException {
         String matricNumber = hashmap.get(ARGUMENT_PREFIXES[0]);
@@ -55,7 +58,7 @@ public class DeleteGradeCommand extends Command {
                     appState.components);
             student.setPercentageScore(percentageScore);
         } catch (IncompleteGradesException e) {
-            
+            logger.info(e.getMessage());
         }
 
         return new CommandResult(String.format(Commons.DELETE_GRADE_SUCCESS, componentDescription, matricNumber));

@@ -1,6 +1,8 @@
 package tutorlink.command;
 
+import java.util.logging.Logger;
 import tutorlink.appstate.AppState;
+import tutorlink.exceptions.IncompleteGradesException;
 import tutorlink.grade.Grade;
 import tutorlink.result.CommandResult;
 import tutorlink.exceptions.StudentNotFoundException;
@@ -19,6 +21,7 @@ public class ListGradeCommand extends Command {
     public static final String[] ARGUMENT_PREFIXES = {"i/"};
     private static final String MESSAGE_NO_GRADES = "No grades have been recorded yet.";
     private static final String MESSAGE_STUDENT_NOT_FOUND = "No grades found for student with matriculation number %s.";
+    private static final Logger logger = Logger.getLogger(DeleteComponentCommand.class.getName());
 
     @Override
     public CommandResult execute(AppState appState, HashMap<String, String> hashMap) throws StudentNotFoundException {
@@ -74,9 +77,13 @@ public class ListGradeCommand extends Command {
         }
 
         // Calculate and display the GPA (final grade)
-        double percentageScore = appState.grades.calculateStudentPercentageScore(student.getMatricNumber(),
-                appState.components);
-        output.append(String.format("\nFinal score: %.2f%%\n", percentageScore));
+        try {
+            double percentageScore = appState.grades.calculateStudentPercentageScore(student.getMatricNumber(),
+                    appState.components);
+            output.append(String.format("\nFinal score: %.2f%%\n", percentageScore));
+        } catch (IncompleteGradesException e) {
+            logger.info(e.getMessage());
+        }
 
         return new CommandResult(output.toString());
     }
@@ -106,11 +113,14 @@ public class ListGradeCommand extends Command {
                         String.format("   %d. %-15s: %.2f\n", gradeIndex++,
                                 grade.getComponent().getName(), grade.getScore()));
             }
-
-            // Calculate and display the GPA for the student
-            double percentageScore = appState.grades.calculateStudentPercentageScore(student.getMatricNumber(),
-                    appState.components);
-            output.append(String.format("   Final Percentage Score: %.2f%%\n\n", percentageScore));
+            try {
+                // Calculate and display the GPA for the student
+                double percentageScore = appState.grades.calculateStudentPercentageScore(student.getMatricNumber(),
+                        appState.components);
+                output.append(String.format("   Final Percentage Score: %.2f%%\n\n", percentageScore));
+            } catch (IncompleteGradesException e) {
+                logger.info(e.getMessage());
+            }
         }
 
         return new CommandResult(output.toString());

@@ -10,10 +10,8 @@ import tutorlink.result.CommandResult;
 import tutorlink.student.Student;
 
 public class ListStudentCommand extends Command {
-
-    private static final String TO_STRING_DELIMITER = "\n";
-
     public static final String COMMAND_WORD = "list_student";
+    private static final String TO_STRING_DELIMITER = "\n";
 
     private String printStudent(Student student, AppState appState) {
         try {

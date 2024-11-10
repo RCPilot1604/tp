@@ -13,10 +13,10 @@ import tutorlink.result.CommandResult;
 import tutorlink.student.Student;
 
 public class DeleteComponentCommand extends Command{
-    private static final Logger logger = Logger.getLogger(DeleteComponentCommand.class.getName());
 
     public static final String[] ARGUMENT_PREFIXES = {"c/"};
     public static final String COMMAND_WORD = "delete_component";
+    private static final Logger logger = Logger.getLogger(DeleteComponentCommand.class.getName());
 
     @Override
     public CommandResult execute(AppState appState, HashMap<String, String> hashmap) throws TutorLinkException {
